@@ -1,0 +1,40 @@
+@font-face {
+    font-family: "Nanum-square";
+    font-weight: normal;
+    src: url("./NANUMSQUAREB.TTF") format("truetype");
+}
+
+.text100{
+    font-family: "Nanum-square";
+    font-size: 4.5vw;
+}
+
+.text200{
+    font-family: "Nanum-square";
+    font-size: 3.5vw;
+}
+
+.text300{
+    font-family: "Nanum-square";
+    font-size: 2.5vw;
+}
+
+.text400{
+    font-family: "Nanum-square";
+    font-size: 2vw;
+}
+
+.text500{
+    font-family: "Nanum-square";
+    font-size: 1.5vw;
+}
+
+.text600{
+    font-family: "Nanum-square";
+    font-size: 1vw;
+}
+
+.text700{
+    font-family: "Nanum-square";
+    font-size: 0.5vw;
+}
