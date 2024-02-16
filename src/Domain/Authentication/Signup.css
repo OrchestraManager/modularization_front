@@ -1,0 +1,159 @@
+@import url(../../Common/font/Font.css);
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+
+.Signup {
+    width: 100%;
+    height: 99.8vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.SignupBox {
+    width: 30vw;
+    height: 60vh;
+    display : flex;
+    flex-direction: column;
+    align-items: center;
+    border : 1px solid black;
+    padding : 10px;
+}
+
+.SignupBox .text400 {
+    flex : 2;
+}
+
+.SignupBoxInputField {
+    flex : 2;
+    width: 28vw;
+    display : flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.SignupBoxInputField .text600 {
+    flex : 1;
+    height : 80%;
+    display : flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left : 1.8vw;   
+}
+
+.SignupBoxNameField {
+    flex : 4;
+    outline : none;
+    border : none;
+    margin-right: 2vw;
+    border-bottom : 3px solid black;
+    height : 80%;
+    font-size : 1vw;
+    font-family: "Nanum-square";
+}
+
+.SignupBoxIdField {
+    flex : 4;
+    outline : none;
+    border : none;
+    margin-right: 2vw;
+    border-bottom : 3px solid black;
+    height : 80%;
+    font-size : 1vw;
+    font-family: "Nanum-square";
+}
+
+.IdDoubleCheckBox {
+    flex : 0.8;
+    width : 28vw;
+    display : flex;
+    flex-direction : row;
+    justify-content: center;
+    align-items: center;
+}
+
+.IdDoubleCheckButton {
+    flex : 1;
+    border-radius: 5rem;
+    border : 1px solid black;
+    margin : 4px;
+}
+
+.IdDoubleCheckButton:hover {
+    background-color: aquamarine;
+}
+
+.IdDoubleCheckStatus {
+    flex : 4;
+    display: flex;
+    font-size : 0.8vw;
+    margin-left : 10px;
+    font-family: "Nanum-square";
+    align-items: flex-start;
+}
+
+
+.SignupBoxPWField {
+    flex : 4;
+    outline : none;
+    border : none;
+    margin-right: 2vw;
+    margin-bottom : 3px;
+    border-bottom : 3px solid black;
+    height : 80%;
+    font-size : 1vw;
+}
+
+.SignupBoxPWCheckFieldBox {
+    flex : 4;
+    margin-right: 2vw;
+    margin-bottom : 3px;
+    height : 80%;
+    display : flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+
+.SignupBoxPWCheckField {
+    outline : none;
+    border : none;
+    border-bottom : 3px solid black;
+    font-size : 1vw;
+    flex : 2.5;
+    width : 100%;
+}
+
+.SignupBoxPWCheckFieldBox .text700 {
+    flex : 1.5;
+    width : 100%;
+    display : flex;
+    align-items: flex-start;
+    font-size : 0.7vw;
+}
+
+.SignupButtonBox {
+    flex : 3;
+    width : 28vw;
+    display : flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.SignupButton {
+    width: 80%;
+    height : 40%;
+    display : flex;
+    justify-content: center;
+    align-items: center;
+    border : 1px solid black;
+    border-radius: 5rem;
+}
+
+.SignupButton:hover {
+    background-color: aquamarine;
+}
