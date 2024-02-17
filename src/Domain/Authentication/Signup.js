@@ -1,5 +1,6 @@
 import "./Signup.css";
 import { useState, useEffect } from "react";
+import Server from "../../Common/server/server.json";
 
 export function Signup() {
     
@@ -23,13 +24,79 @@ export function Signup() {
         }
     }, [userPW, userPWCheck])
 
+    useEffect(() => {
+        setIDDoubleCheck('중복체크를 해주세요.');
+    }, [userId])
+
     // Function to doublecheck ID. Send written ID to server and get a response.
     const doubleCheckId = () => {
+        
         if(userId.includes(" ")) {
             setIDDoubleCheck('아이디에는 공백을 추가할 수 없습니다.')
         }
         else {
-            setIDDoubleCheck('사용 가능한 아이디입니다.');
+
+            fetch(Server.server + '/idDoubleCheck', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ userId: userId }),
+            mode : 'cors'
+            })
+            .then(response => {
+                if (!response.ok) {
+                    console.log("Network Error at idDoubleCheck.");
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.check) {
+                    setIDDoubleCheck('사용 가능한 아이디입니다.');
+                } else {
+                    setIDDoubleCheck('이미 사용 중인 아이디입니다.');
+                }
+            })
+            .catch(error => {
+                console.error('Network Error at idDoubleCheck.', error);
+                setIDDoubleCheck('다시 눌러주세요.');
+            });
+        }
+    }
+
+    // Put user identity into database.
+    const signupFinal = () => {
+
+        if((userPW !== "") && (userPW === userPWCheck) && (IDDoubleCheck === "사용 가능한 아이디입니다.")){
+            fetch(Server.server + '/signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ userName: userName, userId: userId, userPW: userPW }),
+                mode : 'cors'
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        console.log("Network Error at signup.");
+                    }
+                })
+                .catch(error => {
+                    console.error('Network Error at signup.', error);
+                    alert('네트워크 오류입니다. 다시 접속해주세요.');
+                });
+        }
+        else if (IDDoubleCheck !== "사용 가능한 아이디입니다.") {
+            alert("아이디 중복 체크를 해주세요.");
+        }
+        else if (userPW === "") {
+            alert("비밀번호는 필수 입력 사항입니다.");
+        }
+        else if (userPW !== userPWCheck) {
+            alert("비밀번호를 다시 확인해주세요.");
+        }
+        else {
+            alert("문제가 발생했습니다. 창을 새로고침해주세요.");
         }
     }
 
@@ -85,8 +152,8 @@ export function Signup() {
                 </div>
 
                 <div className = "SignupButtonBox">
-                    <div className = "SignupButton">
-                    <div className = "text600">로그인하기</div>
+                    <div className = "SignupButton" onClick = {signupFinal}>
+                    <div className = "text600">계정 생성하기</div>
                     </div>
                 </div>
 
