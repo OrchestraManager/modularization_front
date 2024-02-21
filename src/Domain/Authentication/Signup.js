@@ -1,6 +1,7 @@
 import "./Signup.css";
 import { useState, useEffect } from "react";
 import Server from "../../Common/server/server.json";
+import { useNavigate } from 'react-router-dom';
 
 export function Signup() {
     
@@ -10,6 +11,7 @@ export function Signup() {
     const [userPWCheck, setUserPWCheck] = useState('');
     const [PWCheckStatus, setPWCheckStatus] = useState('');
     const [IDDoubleCheck, setIDDoubleCheck] = useState('중복체크를 해주세요.');
+    const navigate = useNavigate();
 
     // Check the difference between password and password recheck.
     useEffect(() => {
@@ -79,6 +81,12 @@ export function Signup() {
                 .then(response => {
                     if (!response.ok) {
                         console.log("Network Error at signup.");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.check) {
+                        navigate({pathname : "/"});
                     }
                 })
                 .catch(error => {

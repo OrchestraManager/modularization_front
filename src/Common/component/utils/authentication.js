@@ -1,0 +1,1 @@
+export const checkLogin = () =>  !! localStorage.getItem('uid');
