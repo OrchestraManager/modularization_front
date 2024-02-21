@@ -1,0 +1,39 @@
+@import url("../../Common/font/Font.css");
+
+.Navbar {
+    width : 1000px;
+    height : 10vh;
+    display : flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom : 20px;
+}
+
+.LeftMenu {
+    width : 400px;
+    display : flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap : 40px;
+    margin-left : 10px;
+}
+
+.Logo {
+    width : 10vh;
+    height : 100%;
+    background-image: url("/public/picture/character.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.RightMenu {
+    width : 400px;
+    display : flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    gap : 40px;
+    margin-right: 10px;
+}

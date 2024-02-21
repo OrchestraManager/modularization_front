@@ -37,6 +37,8 @@ export function Login() {
                     case "success":
                         if(data.token) {
                             localStorage.setItem("uid", data.token); // Store token at local storage.
+                            console.log(localStorage.getItem("uid"));
+                            navigate({pathname: "/main"});
                         }
                         break;
                     case "missingId":
@@ -56,6 +58,17 @@ export function Login() {
             });
     }
 
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+          if(userId === "") {
+            alert("아이디를 입력해주세요.")
+          }
+          else {
+            loginFinal();
+          }
+        }
+    };
+
     const MoveToSignup = () => {
         navigate({pathname: "/signup"});
     }
@@ -70,7 +83,7 @@ export function Login() {
                 </div>
                 <div className = "LoginBoxInputField">
                     <div className = "text600">비밀번호</div>                    
-                    <input className = "LoginBoxPWField" type = "password" value = {userPW} onChange = {updateUserPW}/>
+                    <input className = "LoginBoxPWField" type = "password" value = {userPW} onChange = {updateUserPW} onKeyDown={handleKeyDown}/>
                 </div>
                 
                 <div className = "LoginExceptionBox">
