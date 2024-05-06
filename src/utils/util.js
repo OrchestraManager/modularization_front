@@ -1,15 +1,15 @@
-import "./Navbar.css";
-import { BiMenu } from "react-icons/bi";
-import Server from "../server/server.json";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import  Server  from "./server.json";
+import { useState, useEffect } from "react";
 
-export function Navbar() {
-
+export function GetUserId() {
     const [userId, setUserId] = useState("admin");
+
     const navigate = useNavigate();
     const token = localStorage.getItem("uid");
 
+    // Get user id.
+    useEffect(() => {
     fetch(Server.server + '/userid', {
         method: 'GET',
         headers: {
@@ -33,24 +33,7 @@ export function Navbar() {
             navigate({pathname: "/"});
             alert("사용자를 찾을 수 없습니다. 다시 로그인해주세요.");
         });
+    }, [token, navigate]);
 
-    return (
-        <div className = "Navbar">
-            <div className = "LeftMenu">
-                <div className = "Logo"></div>
-                <div className = "text600">
-                    안녕하세요, {userId}님?
-                </div>
-            </div>
-            <div className = "RightMenu">
-                <div className = "text600">
-                    방구석 콘서트
-                </div>
-                <div className = "text600">
-                    상점
-                </div>
-                <BiMenu size = "35"/>
-            </div>
-        </div>
-    )
+    return userId;
 }

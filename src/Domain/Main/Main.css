@@ -1,9 +1,0 @@
-@import url("../../Common/font/Font.css");
-
-.mainpage {
-    display : flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width : 100%;
-}
