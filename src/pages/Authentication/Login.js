@@ -1,10 +1,10 @@
 import "./Login.css";
-import Server from "../../Common/server/server.json";
+import Server from "../../utils/server.json";
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 
 export function Login() {
-    
+
     const [userId, setUserId] = useState('아이디를 입력하세요.');
     const [userPW, setUserPW] = useState('');
     const navigate = useNavigate();
@@ -24,8 +24,8 @@ export function Login() {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ userId: userId, userPW: userPW }),
-            mode : 'cors'
-            })
+            mode: 'cors'
+        })
             .then(response => {
                 if (!response.ok) {
                     console.log("Network Error at login.");
@@ -35,10 +35,10 @@ export function Login() {
             .then(data => {
                 switch (data.result) {
                     case "success":
-                        if(data.token) {
+                        if (data.token) {
                             localStorage.setItem("uid", data.token); // Store token at local storage.
                             console.log(localStorage.getItem("uid"));
-                            navigate({pathname: "/main"});
+                            navigate({ pathname: "/main" });
                         }
                         break;
                     case "missingId":
@@ -60,44 +60,44 @@ export function Login() {
 
     const handleKeyDown = (event) => {
         if (event.key === 'Enter') {
-          if(userId === "") {
-            alert("아이디를 입력해주세요.")
-          }
-          else {
-            loginFinal();
-          }
+            if (userId === "") {
+                alert("아이디를 입력해주세요.")
+            }
+            else {
+                loginFinal();
+            }
         }
     };
 
     const MoveToSignup = () => {
-        navigate({pathname: "/signup"});
+        navigate({ pathname: "/signup" });
     }
-    
+
     return (
-        <div className = "Login">
-            <div className = "LoginBox">
-                <div className = "text400">로그인</div>
-                <div className = "LoginBoxInputField">
-                    <div className = "text600">아이디</div>
-                    <input className = "LoginBoxIdField" type = "text" value = {userId} onChange = {updateUserId}/>
+        <div className="Login">
+            <div className="LoginBox">
+                <div className="text400">로그인</div>
+                <div className="LoginBoxInputField">
+                    <div className="text600">아이디</div>
+                    <input className="LoginBoxIdField" type="text" value={userId} onChange={updateUserId} />
                 </div>
-                <div className = "LoginBoxInputField">
-                    <div className = "text600">비밀번호</div>                    
-                    <input className = "LoginBoxPWField" type = "password" value = {userPW} onChange = {updateUserPW} onKeyDown={handleKeyDown}/>
+                <div className="LoginBoxInputField">
+                    <div className="text600">비밀번호</div>
+                    <input className="LoginBoxPWField" type="password" value={userPW} onChange={updateUserPW} onKeyDown={handleKeyDown} />
                 </div>
-                
-                <div className = "LoginExceptionBox">
-                    <div className = "LoginExceptionSignup" onClick = {() => MoveToSignup()}>
-                        <div className = "text600">회원가입</div>
+
+                <div className="LoginExceptionBox">
+                    <div className="LoginExceptionSignup" onClick={() => MoveToSignup()}>
+                        <div className="text600">회원가입</div>
                     </div>
-                    <div className = "LoginExceptionLost">
-                        <div className = "text600">비밀번호 찾기</div>
+                    <div className="LoginExceptionLost">
+                        <div className="text600">비밀번호 찾기</div>
                     </div>
                 </div>
 
-                <div className = "LoginButtonBox">
-                    <div className = "LoginButton" onClick = {loginFinal}>
-                    <div className = "text600">로그인하기</div>
+                <div className="LoginButtonBox">
+                    <div className="LoginButton" onClick={loginFinal}>
+                        <div className="text600">로그인하기</div>
                     </div>
                 </div>
 

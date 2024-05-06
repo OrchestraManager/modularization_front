@@ -1,8 +1,10 @@
 import React, { useEffect, useRef } from 'react';
+import "./Room.css";
 
 export function Room() {
 
   const canvasRef = useRef(null);
+  const canvasWidth = 1000;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -18,10 +20,17 @@ export function Room() {
       ctx.drawImage(image1, 0, 0);
     };
     image2.onload = () => {
-        ctx.drawImage(image2, 460, 200);
+        ctx.drawImage(image2, 0.46*canvasWidth, 200);
     }
   }, []);
 
-  return <canvas ref={canvasRef} width={1000} height={500} />;
-
+  return (
+    <div className = "room-container" width={canvasWidth}>
+      <div className = "room-top">
+        <div className = "text500">나의 공연장</div>
+        <div className = "text600">꾸미러 가기</div>
+      </div>
+      <canvas ref={canvasRef} className = "canvas" width={canvasWidth} height={500} />;
+    </div>
+  )
 }

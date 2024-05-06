@@ -1,0 +1,39 @@
+@import url("../../Common/font/Font.css");
+
+.mainpage {
+    display : flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width : 100%;
+}
+
+.content {
+    display : flex;
+    flex-direction: row;
+    gap : 13px;
+    width : 80%;
+    margin-top : 40px;
+}
+
+.left-aside {
+    flex : 1;
+    border-radius: 3rem;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
+}
+
+.content-main {
+    flex : 3.7;
+    border-radius: 3rem;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
+    padding : 10px;
+    display : flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.right-aside {
+    flex : 1;
+    border-radius: 3rem;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
+}

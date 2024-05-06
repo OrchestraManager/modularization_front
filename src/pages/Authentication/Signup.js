@@ -1,10 +1,10 @@
 import "./Signup.css";
 import { useState, useEffect } from "react";
-import Server from "../../Common/server/server.json";
+import Server from "../../utils/server.json";
 import { useNavigate } from 'react-router-dom';
 
 export function Signup() {
-    
+
     const [userName, setUserName] = useState('이름을 적어주세요.');
     const [userId, setUserId] = useState('아이디를 입력하세요.');
     const [userPW, setUserPW] = useState('');
@@ -32,52 +32,52 @@ export function Signup() {
 
     // Function to doublecheck ID. Send written ID to server and get a response.
     const doubleCheckId = () => {
-        
-        if(userId.includes(" ")) {
+
+        if (userId.includes(" ")) {
             setIDDoubleCheck('아이디에는 공백을 추가할 수 없습니다.')
         }
         else {
 
             fetch(Server.server + '/idDoubleCheck', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ userId: userId }),
-            mode : 'cors'
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ userId: userId }),
+                mode: 'cors'
             })
-            .then(response => {
-                if (!response.ok) {
-                    console.log("Network Error at idDoubleCheck.");
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.check) {
-                    setIDDoubleCheck('사용 가능한 아이디입니다.');
-                } else {
-                    setIDDoubleCheck('이미 사용 중인 아이디입니다.');
-                }
-            })
-            .catch(error => {
-                console.error('Network Error at idDoubleCheck.', error);
-                setIDDoubleCheck('다시 눌러주세요.');
-            });
+                .then(response => {
+                    if (!response.ok) {
+                        console.log("Network Error at idDoubleCheck.");
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.check) {
+                        setIDDoubleCheck('사용 가능한 아이디입니다.');
+                    } else {
+                        setIDDoubleCheck('이미 사용 중인 아이디입니다.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Network Error at idDoubleCheck.', error);
+                    setIDDoubleCheck('다시 눌러주세요.');
+                });
         }
     }
 
     // Put user identity into database.
     const signupFinal = () => {
 
-        if((userPW !== "") && (userPW === userPWCheck) && (IDDoubleCheck === "사용 가능한 아이디입니다.")){
+        if ((userPW !== "") && (userPW === userPWCheck) && (IDDoubleCheck === "사용 가능한 아이디입니다.")) {
             fetch(Server.server + '/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ userName: userName, userId: userId, userPW: userPW }),
-                mode : 'cors'
-                })
+                mode: 'cors'
+            })
                 .then(response => {
                     if (!response.ok) {
                         console.log("Network Error at signup.");
@@ -86,7 +86,7 @@ export function Signup() {
                 })
                 .then(data => {
                     if (data.check) {
-                        navigate({pathname : "/"});
+                        navigate({ pathname: "/" });
                     }
                 })
                 .catch(error => {
@@ -123,45 +123,45 @@ export function Signup() {
     const updateUserPWCheck = (event) => {
         setUserPWCheck(event.target.value);
     }
-    
+
     return (
-        <div className = "Signup">
-            <div className = "SignupBox">
-                <div className = "text400">회원가입</div>
+        <div className="Signup">
+            <div className="SignupBox">
+                <div className="text400">회원가입</div>
 
-                <div className = "SignupBoxInputField">
-                    <div className = "text600">이름</div>                    
-                    <input className = "SignupBoxNameField" type = "text" value = {userName} onChange = {updateUserName}/>
+                <div className="SignupBoxInputField">
+                    <div className="text600">이름</div>
+                    <input className="SignupBoxNameField" type="text" value={userName} onChange={updateUserName} />
                 </div>
 
-                <div className = "SignupBoxInputField">
-                    <div className = "text600">아이디</div>
-                    <input className = "SignupBoxIdField" type = "text" value = {userId} onChange = {updateUserId}/>
+                <div className="SignupBoxInputField">
+                    <div className="text600">아이디</div>
+                    <input className="SignupBoxIdField" type="text" value={userId} onChange={updateUserId} />
                 </div>
 
-                <div className = "IdDoubleCheckBox">
-                    <div className = "IdDoubleCheckButton" onClick = {doubleCheckId}>
-                        <div className = "text600">중복체크</div>
+                <div className="IdDoubleCheckBox">
+                    <div className="IdDoubleCheckButton" onClick={doubleCheckId}>
+                        <div className="text600">중복체크</div>
                     </div>
-                    <div className = "IdDoubleCheckStatus">{IDDoubleCheck}</div>
+                    <div className="IdDoubleCheckStatus">{IDDoubleCheck}</div>
                 </div>
 
-                <div className = "SignupBoxInputField">
-                    <div className = "text600">비밀번호</div>                    
-                    <input className = "SignupBoxPWField" type = "password" value = {userPW} onChange = {updateUserPW}/>
-                </div>
-                
-                <div className = "SignupBoxInputField">
-                    <div className = "text600">비밀번호 확인 </div>
-                    <div className = "SignupBoxPWCheckFieldBox">
-                        <input className = "SignupBoxPWCheckField" type = "password" value = {userPWCheck} onChange = {updateUserPWCheck}/>
-                        <div className = "text700">{PWCheckStatus}</div>
-                    </div>                     
+                <div className="SignupBoxInputField">
+                    <div className="text600">비밀번호</div>
+                    <input className="SignupBoxPWField" type="password" value={userPW} onChange={updateUserPW} />
                 </div>
 
-                <div className = "SignupButtonBox">
-                    <div className = "SignupButton" onClick = {signupFinal}>
-                    <div className = "text600">계정 생성하기</div>
+                <div className="SignupBoxInputField">
+                    <div className="text600">비밀번호 확인 </div>
+                    <div className="SignupBoxPWCheckFieldBox">
+                        <input className="SignupBoxPWCheckField" type="password" value={userPWCheck} onChange={updateUserPWCheck} />
+                        <div className="text700">{PWCheckStatus}</div>
+                    </div>
+                </div>
+
+                <div className="SignupButtonBox">
+                    <div className="SignupButton" onClick={signupFinal}>
+                        <div className="text600">계정 생성하기</div>
                     </div>
                 </div>
 
